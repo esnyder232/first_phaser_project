@@ -7,6 +7,9 @@ const port = 5000;
 app.get('/', (req, res) => {res.sendFile(path.join(__dirname, "index.html"));});
 app.get('/index.html', (req, res) => {res.sendFile(path.join(__dirname, "index.html"));});
 
+//static files
+app.use('/assets', express.static(path.join(__dirname, "/assets")));
+
 
 //run the server
 app.listen(port, () => console.log(`first_phaser_project listening on port ${port}!`));
