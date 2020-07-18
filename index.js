@@ -9,6 +9,7 @@ app.get('/index.html', (req, res) => {res.sendFile(path.join(__dirname, "index.h
 
 //static files
 app.use('/assets', express.static(path.join(__dirname, "/assets")));
+app.use('/src', express.static(path.join(__dirname, "/src")));
 
 
 //run the server
