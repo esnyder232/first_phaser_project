@@ -1,33 +1,16 @@
-const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const commonConfig = require('./webpack.common.js');
+const productionConfig = require('./webpack.prod.js');
+const developmentConfig = require('./webpack.dev.js');
+const {merge} = require('webpack-merge');
 
-
-module.exports = {
-	mode: 'development',
-	entry: './src/main.js',
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: 'game.js'
-	},
-	plugins: [
-		new CleanWebpackPlugin(),
-		new HtmlWebpackPlugin()
-	],
-	module: {
-		rules: [{
-			test: /\.(png|jpg|gif)$/,
-			use: {
-				loader: 'file-loader',
-				options: {
-					outputPath: 'assets'
-				}
-			}
-		}]
-	},
-	devServer: {
-		contentBase: path.join(__dirname, 'dist')
-	}
+module.exports = env => {
+	console.log('env is: ' + env.env);
+  	switch(env.env) {
+    	case 'dev':
+		console.log('Using dev webpack config (merging webpack.common.js and webpack.dev.js)')
+      	return merge(commonConfig, developmentConfig);
+	default:
+		console.log('Using prod webpack config (merging webpack.common.js and webpack.prod.js)')
+		return merge(commonConfig, productionConfig);
+  }
 }
-
-
