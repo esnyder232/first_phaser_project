@@ -10,18 +10,17 @@ export default class App {
 			type: Phaser.AUTO,
 			physics: {
 				default: 'arcade',
-				debug: false,
+				debug: true,
 				arcade: {
 					gravity: {
 						y: 300
 					}
 				}
 			}
-		}
+		}		
 
 		this.game = new Phaser.Game(this.config);
 		this.game.scene.add('game-manager-scene', GameManagerScene, true);
-
 	}	
 }
 
